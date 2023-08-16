@@ -1,10 +1,36 @@
-.AuthPage {
-  height: 100%;
+body {
+  margin: 0;
+}
+
+.container {
   display: flex;
-  justify-content: space-evenly;
+  height: 100vh;
+}
+
+.video-column {
+  flex: 1; /* Take up the remaining space */
+  position: relative;
+  overflow: hidden;
+}
+
+.AuthPage-column {
+  width: 2vmin;
+  display: flex;
+  justify-content: center;
   align-items: center;
   background-color: var(--white);
   border-radius: 2vmin;
+  position: relative;
+  overflow: hidden;
+}
+
+.AuthPage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .AuthPage h3 {
@@ -12,4 +38,21 @@
   text-align: center;
   color: var(--text-light);
   cursor: pointer;
+}
+
+.video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
