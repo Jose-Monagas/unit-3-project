@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import * as itemsAPI from '../../utilities/items-api';
-import * as ordersAPI from '../../utilities/order-api';
-import styles from './NewOrderPage.module.scss';
+import * as workoutsAPI from '../../utilities/workout-api';
+import styles from './NewWorkoutPage.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../components/Logo/Logo';
 import MenuList from '../../components/MenuList/MenuList';
 import CategoryList from '../../components/CategoryList/CategoryList';
-import OrderDetail from '../../components/OrderDetail/OrderDetail';
+import WorkoutDetail from '../../components/WorkoutDetail/WorkoutDetail';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 
-export default function NewOrderPage({ user, setUser }) {
+export default function NewWorkoutPage({ user, setUser }) {
 	const [menuItems, setMenuItems] = useState([]);
 	const [activeCat, setActiveCat] = useState('');
 	const [cart, setCart] = useState(null);
@@ -28,7 +28,7 @@ export default function NewOrderPage({ user, setUser }) {
 		}
 		getItems();
 		async function getCart() {
-			const cart = await ordersAPI.getCart();
+			const cart = await workoutsAPI.getCart();
 			setCart(cart);
 		}
 		getCart();
@@ -38,24 +38,23 @@ export default function NewOrderPage({ user, setUser }) {
 	// the FIRST render only
 
 	/*-- Event Handlers --*/
-	async function handleAddToOrder(itemId) {
-		const updatedCart = await ordersAPI.addItemToCart(itemId);
-		console.log(updatedCart);
-		setCart(updatedCart);
+	async function handleAddToWorkout(exerciseId) {
+		const updatedWorkout = await workoutsAPI.addExerciseToWorkout(exerciseId);
+		setCart(updatedWorkout);
 	}
 
 	async function handleChangeQty(itemId, newQty) {
-		const updatedCart = await ordersAPI.setItemQtyInCart(itemId, newQty);
+		const updatedCart = await workoutsAPI.setItemQtyInCart(itemId, newQty);
 		setCart(updatedCart);
 	}
 
 	async function handleCheckout() {
-		await ordersAPI.checkout();
-		navigate('/orders');
+		await workoutsAPI.checkout();
+		navigate('/workouts');
 	}
 
 	return (
-		<main className={styles.NewOrderPage}>
+		<main className={styles.NewWorkoutPage}>
 			<aside>
 				<Logo />
 				<CategoryList
@@ -63,17 +62,17 @@ export default function NewOrderPage({ user, setUser }) {
 					cart={setCart}
 					setActiveCat={setActiveCat}
 				/>
-				<Link to="/orders" className="button btn-sm">
+				<Link to="/workouts" className="button btn-sm">
 					PREVIOUS ORDERS
 				</Link>
 				<UserLogOut user={user} setUser={setUser} />
 			</aside>
 			<MenuList
 				menuItems={menuItems.filter((item) => item.category.name === activeCat)}
-				handleAddToOrder={handleAddToOrder}
+				handleAddToWorkout={handleAddToWorkout}
 			/>
-			<OrderDetail
-				order={cart}
+			<WorkoutDetail
+				workout={cart}
 				handleChangeQty={handleChangeQty}
 				handleCheckout={handleCheckout}
 			/>

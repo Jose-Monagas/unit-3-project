@@ -1,5 +1,5 @@
 
-.OrderHistoryPage {
+.WorkoutHistoryPage {
   height: 100%;
   display: grid;
   grid-template-columns: 1.6fr 3.5fr 3fr;
@@ -8,7 +8,7 @@
   border-radius: 2vmin;
 }
 
-.OrderHistoryPage .aside {
+.WorkoutHistoryPage .aside {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -1,33 +1,31 @@
 import sendRequest from './send-request';
 
-const BASE_URL = '/api/orders';
+const BASE_URL = '/api/workouts';
 
-// Retrieve an unpaid order for the logged in user
+// Retrieve an unpaid workout for the logged in user
 export function getCart() {
 	return sendRequest(`${BASE_URL}/cart`);
 }
 
-// Add an item to the cart
-export function addItemToCart(itemId) {
-	// Just send itemId for best security (no pricing)
-	console.log({ itemId });
-	return sendRequest(`${BASE_URL}/cart/items/${itemId}`, 'POST');
+// Add an exercise to the workout
+export function addExerciseToWorkout(exerciseId) {
+	return sendRequest(`${BASE_URL}/exercises/${exerciseId}`, 'POST');
 }
 
 // Update the item's qty in the cart
-// Will add the item to the order if not currently in the cart
+// Will add the item to the workout if not currently in the cart
 // Sending info via the data payload instead of a long URL
 export function setItemQtyInCart(itemId, newQty) {
 	return sendRequest(`${BASE_URL}/cart/qty`, 'PUT', { itemId, newQty });
 }
 
-// Updates the order's (cart's) isPaid property to true
+// Updates the workout's (cart's) isPaid property to true
 export function checkout() {
 	// Changing data on the server, so make it a POST request
 	return sendRequest(`${BASE_URL}/cart/checkout`, 'POST');
 }
 
-// Return all paid orders for the logged in user
-export function getOrderHistory() {
+// Return all paid workouts for the logged in user
+export function getWorkoutHistory() {
 	return sendRequest(`${BASE_URL}/history`);
 }

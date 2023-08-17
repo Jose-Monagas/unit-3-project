@@ -15,7 +15,7 @@ app.use('/api/users', require('./routes/api/users'));
 // Protect the API routes below from anonymous users
 const ensureLoggedIn = require('./config/ensureLoggedIn');
 app.use('/api/items', ensureLoggedIn, require('./routes/api/items'));
-app.use('/api/orders', ensureLoggedIn, require('./routes/api/orders'));
+app.use('/api/workouts', ensureLoggedIn, require('./routes/api/workouts'));
 
 // for react router
 app.get('*', (req, res) => {

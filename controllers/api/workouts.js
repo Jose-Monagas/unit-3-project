@@ -1,29 +1,29 @@
-const Order = require('../../models/order');
+const Workout = require('../../models/workout');
 
 module.exports = {
 	cart,
-	addToCart,
+	addToWorkout,
 	setItemQtyInCart,
 	checkout,
 	history
 };
 
-// A cart is the unpaid order for a user
+// A cart is the unpaid workout for a user
 async function cart(req, res) {
 	try {
-		const cart = await Order.getCart(req.user._id);
-		res.status(200).json(cart);
+		const workout = await Workout.createWorkout(req.user._id);
+		res.status(200).json(workout);
 	} catch (e) {
 		res.status(400).json({ msg: e.message });
 	}
 }
 
 // Add an item to the cart
-async function addToCart(req, res) {
+async function addToWorkout(req, res) {
 	try {
-		const cart = await Order.getCart(req.user._id);
-		await cart.addItemToCart(req.params.id);
-		res.status(200).json(cart);
+		const workout = await Workout.createWorkout(req.user._id);
+		await workout.addExerciseToWorkout(req.params.id);
+		res.status(200).json(workout);
 	} catch (e) {
 		console.log(e);
 		res.status(400).json({ msg: e.message });
@@ -33,7 +33,7 @@ async function addToCart(req, res) {
 // Updates an item's qty in the cart
 async function setItemQtyInCart(req, res) {
 	try {
-		const cart = await Order.getCart(req.user._id);
+		const cart = await Workout.getCart(req.user._id);
 		await cart.setItemQty(req.body.itemId, req.body.newQty);
 		res.status(200).json(cart);
 	} catch (e) {
@@ -44,7 +44,7 @@ async function setItemQtyInCart(req, res) {
 // Update the cart's isPaid property to true
 async function checkout(req, res) {
 	try {
-		const cart = await Order.getCart(req.user._id);
+		const cart = await Workout.getCart(req.user._id);
 		cart.isPaid = true;
 		await cart.save();
 		res.status(200).json(cart);
@@ -53,14 +53,14 @@ async function checkout(req, res) {
 	}
 }
 
-// Return the logged in user's paid order history
+// Return the logged in user's paid workout history
 async function history(req, res) {
-	// Sort most recent orders first
+	// Sort most recent workouts first
 	try {
-		const orders = await Order.find({ user: req.user._id, isPaid: true })
+		const workouts = await Workout.find({ user: req.user._id, isPaid: true })
 			.sort('-updatedAt')
 			.exec();
-		res.status(200).json(orders);
+		res.status(200).json(workouts);
 	} catch (e) {
 		res.status(400).json({ msg: e.message });
 	}

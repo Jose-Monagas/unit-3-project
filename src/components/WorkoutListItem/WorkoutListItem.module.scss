@@ -1,4 +1,4 @@
-.OrderListItem {
+.WorkoutListItem {
 width: 100%;
 display: flex;
 justify-content: space-between;
@@ -13,17 +13,17 @@ font-size: 2vmin;
 cursor: pointer;
 }
 
-.OrderListItem > div> div:first-child {
+.WorkoutListItem > div> div:first-child {
 margin-bottom: .5vmin;
 }
 
-.OrderListItem.selected {
+.WorkoutListItem.selected {
 border-color: var(--orange);
 border-width: .2vmin;
 cursor: default;
 }
 
-.OrderListItem:not(.selected):hover {
+.WorkoutListItem:not(.selected):hover {
 border-color: var(--orange);
 border-width: .2vmin;
 }

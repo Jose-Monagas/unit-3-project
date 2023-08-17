@@ -2,7 +2,7 @@ require('dotenv').config();
 require('./database');
 
 const Category = require('../models/category');
-const Item = require('../models/item');
+const Exercise = require('../models/exercise');
 
 (async function () {
 	await Category.deleteMany({});
@@ -16,202 +16,275 @@ const Item = require('../models/item');
 		{ name: 'Upper Body', sortOrder: 70 }
 	]);
 
-	await Item.deleteMany({});
-	const items = await Item.create([
+	await Exercise.deleteMany({});
+	const exercises = await Exercise.create([
 		{
 			name: 'Cycling',
-			emoji: '🍔',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[0],
-			price: 10,
-			imageLink:
-				'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp'
+			sets: 10
 		},
 		{
 			name: 'Running',
-			emoji: '🥪',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[0],
-			price: 6.95
-		},
-		{ name: 'Rowing', emoji: '🌭', category: categories[0], price: 3.95 },
-		{
-			name: 'Jumping Rope',
-			emoji: '🦀',
-			category: categories[0],
-			price: 14.95
+			sets: 6.95
 		},
 		{
-			name: 'Jumping Rope',
-			emoji: '🦀',
+			name: 'Rowing',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[0],
-			price: 14.95
+			sets: 3.95
+		},
+		{
+			name: 'Jumping Rope',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[0],
+			sets: 14.95
+		},
+		{
+			name: 'Jumping Rope',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[0],
+			sets: 14.95
 		},
 		{
 			name: 'Plank',
-			emoji: '🍤',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[1],
-			price: 13.95
+			sets: 13.95
 		},
 		{
 			name: 'Crunches',
-			emoji: '🦞',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[1],
-			price: 25.95
+			sets: 25.95
 		},
 		{
 			name: 'Russian Twists',
-			emoji: '🦞',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[1],
-			price: 25.95
+			sets: 25.95
 		},
 		{
 			name: 'Flutter Kicks',
-			emoji: '🦞',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[1],
-			price: 25.95
+			sets: 25.95
 		},
 		{
 			name: 'Superman',
-			emoji: '🦞',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[1],
-			price: 25.95
+			sets: 25.95
 		},
 		{
 			name: 'Bird-Dog',
-			emoji: '🦞',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[1],
-			price: 25.95
+			sets: 25.95
 		},
-		{ name: 'HIIT', emoji: '🌮', category: categories[2], price: 1.95 },
+		{
+			name: 'HIIT',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[2],
+			sets: 1.95
+		},
 		{
 			name: 'Continuous Jumping Jacks',
-			emoji: '🌯',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[2],
-			price: 4.95
+			sets: 4.95
 		},
-		{ name: 'Crossfit', emoji: '🌯', category: categories[2], price: 4.95 },
+		{
+			name: 'Crossfit',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[2],
+			sets: 4.95
+		},
 		{
 			name: 'Mountain Climbers',
-			emoji: '🌯',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[2],
-			price: 4.95
+			sets: 4.95
 		},
-		{ name: 'Bear Crawls', emoji: '🍕', category: categories[3], price: 3.95 },
+		{
+			name: 'Bear Crawls',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[3],
+			sets: 3.95
+		},
 		{
 			name: 'Kettebell Swings',
-			emoji: '🍝',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[3],
-			price: 7.95
+			sets: 7.95
 		},
 		{
 			name: "Farmer's walk",
-			emoji: '🍞',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[3],
-			price: 1.95
+			sets: 1.95
 		},
 		{
 			name: 'Medicine Ball Slams',
-			emoji: '🍞',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[3],
-			price: 1.95
+			sets: 1.95
 		},
 		{
 			name: 'TRX Suspension',
-			emoji: '🍞',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[3],
-			price: 1.95
+			sets: 1.95
 		},
-		{ name: 'Squats', emoji: '🍟', category: categories[4], price: 2.95 },
-		{ name: 'Leg Press', emoji: '🥗', category: categories[4], price: 3.95 },
+		{
+			name: 'Squats',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[4],
+			sets: 2.95
+		},
+		{
+			name: 'Leg Press',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[4],
+			sets: 3.95
+		},
 		{
 			name: 'Bulgarian Split Squats',
-			emoji: '🥗',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[4],
-			price: 3.95
+			sets: 3.95
 		},
-		{ name: 'Hack Squats', emoji: '🥗', category: categories[4], price: 3.95 },
+		{
+			name: 'Hack Squats',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[4],
+			sets: 3.95
+		},
 		{
 			name: 'Glute Bridges',
-			emoji: '🥗',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[4],
-			price: 3.95
+			sets: 3.95
 		},
-		{ name: 'Hip Thrusts', emoji: '🥗', category: categories[4], price: 3.95 },
-		{ name: 'Deadlifts', emoji: '🍨', category: categories[4], price: 1.95 },
-		{ name: "Child's Pose", emoji: '🧁', category: categories[5], price: 0.95 },
-		{ name: 'Pigeon Pose', emoji: '🍮', category: categories[5], price: 2.95 },
+		{
+			name: 'Hip Thrusts',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[4],
+			sets: 3.95
+		},
+		{
+			name: 'Deadlifts',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[4],
+			sets: 1.95
+		},
+		{
+			name: "Child's Pose",
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[5],
+			sets: 0.95
+		},
+		{
+			name: 'Pigeon Pose',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[5],
+			sets: 2.95
+		},
 		{
 			name: 'Cat-Cow Strech',
-			emoji: '🍮',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[5],
-			price: 2.95
+			sets: 2.95
 		},
 		{
 			name: 'Foam Roller Back Stretch',
-			emoji: '🍮',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[5],
-			price: 2.95
+			sets: 2.95
 		},
-		{ name: 'Cobra Strech', emoji: '🍮', category: categories[5], price: 2.95 },
+		{
+			name: 'Cobra Strech',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[5],
+			sets: 2.95
+		},
 		{
 			name: 'Hamstring Strech',
-			emoji: '🍰',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[5],
-			price: 3.95
+			sets: 3.95
 		},
-		{ name: 'Bench Press', emoji: '🥛', category: categories[6], price: 0.95 },
-		{ name: 'Chest Flyes', emoji: '☕', category: categories[6], price: 0.95 },
+		{
+			name: 'Bench Press',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[6],
+			sets: 0.95
+		},
+		{
+			name: 'Chest Flyes',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[6],
+			sets: 0.95
+		},
 		{
 			name: 'Bent-Over Rows',
-			emoji: '🍹',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[6],
-			price: 8.95
+			sets: 8.95
 		},
 		{
 			name: 'Lat Pulldowns',
-			emoji: '🍺',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[6],
-			price: 3.95
+			sets: 3.95
 		},
 		{
 			name: 'Shoulder Press',
-			emoji: '🍷',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[6],
-			price: 7.95
+			sets: 7.95
 		},
 		{
 			name: 'Rear Delt Flyes',
-			emoji: '🍷',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[6],
-			price: 7.95
+			sets: 7.95
 		},
-		{ name: 'Hammer Curls', emoji: '🍷', category: categories[6], price: 7.95 },
+		{
+			name: 'Hammer Curls',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
+			category: categories[6],
+			sets: 7.95
+		},
 		{
 			name: 'Preacher Curls',
-			emoji: '🍷',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[6],
-			price: 7.95
+			sets: 7.95
 		},
 		{
 			name: 'Tricep Pushdowns',
-			emoji: '🍷',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[6],
-			price: 7.95
+			sets: 7.95
 		},
 		{
 			name: 'Skull Crushers',
-			emoji: '🍷',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[6],
-			price: 7.95
+			sets: 7.95
 		},
 		{
 			name: 'Concentration Curls',
-			emoji: '🍷',
+			url: 'https://i.postimg.cc/7LSJC2KS/664caa986ef2d369faad2e68a4f30e565f-schwinn-bike.webp',
 			category: categories[6],
-			price: 7.95
+			sets: 7.95
 		}
 	]);
 
-	console.log(items);
+	console.log(exercises);
 
 	process.exit();
 })();

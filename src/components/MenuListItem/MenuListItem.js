@@ -1,17 +1,15 @@
 import styles from './MenuListItem.module.scss';
 
-export default function MenuListItem({ menuItem, handleAddToOrder }) {
+export default function MenuListItem({ menuItem, handleAddToWorkout }) {
 	return (
 		<div className={styles.MenuListItem}>
-			<div className={styles.emoji + ' ' + 'flex-ctr-ctr'}>
-				{menuItem.emoji}
-			</div>
+			<img src={menuItem.url} height={'100px'} width={'100px'}></img>
 			<div className={styles.name}>{menuItem.name}</div>
 			<div className={styles.buy}>
-				<span>${menuItem.price.toFixed(2)}</span>
+				<span>${menuItem.sets}</span>
 				<button
 					className="btn-sm"
-					onClick={() => handleAddToOrder(menuItem._id)}
+					onClick={() => handleAddToWorkout(menuItem._id)}
 				>
 					ADD
 				</button>
