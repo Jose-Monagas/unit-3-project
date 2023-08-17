@@ -68,22 +68,24 @@ workoutSchema.methods.addExerciseToWorkout = async function (exerciseId) {
 };
 
 // Instance method to set an item's qty in the cart (will add item if does not exist)
-workoutSchema.methods.setItemQty = function (itemId, newQty) {
+workoutSchema.methods.setItemQty = function (workoutItemId, newQty) {
 	// 'this' keyword is bound to the cart (workout doc)
-	const cart = this;
-	// Find the line item in the cart for the menu item
-	const workoutItem = cart.workoutItems.find((workoutItem) =>
-		workoutItem.item._id.equals(itemId)
+	const workout = this;
+	console.log(workout.workoutItems[0]._id.toString() === workoutItemId);
+	// Find the correct workoutItem in the workout
+	const workoutItem = workout.workoutItems.find(
+		(workoutItem) => workoutItem._id.toString() === workoutItemId
 	);
+	console.log(workoutItem);
 	if (workoutItem && newQty <= 0) {
-		// Calling remove, removes itself from the cart.workoutItems array
+		// Calling remove, removes itself from the workout.workoutItems array
 		workoutItem.remove();
 	} else if (workoutItem) {
 		// Set the new qty - positive value is assured thanks to prev if
-		workoutItem.qty = newQty;
+		workoutItem.sets = newQty;
 	}
 	// return the save() method's promise
-	return cart.save();
+	return workout.save();
 };
 
 module.exports = mongoose.model('Workout', workoutSchema);

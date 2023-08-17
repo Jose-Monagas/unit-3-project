@@ -26,7 +26,7 @@ export default function WorkoutDetail({
 						ORDER <span className="smaller">{workout.workoutId}</span>
 					</span>
 				) : (
-					<span>NEW ORDER</span>
+					<span>Current Workout 💪</span>
 				)}
 				<span>{new Date(workout.updatedAt).toLocaleDateString()}</span>
 			</div>

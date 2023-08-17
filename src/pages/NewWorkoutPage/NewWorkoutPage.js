@@ -12,7 +12,7 @@ import UserLogOut from '../../components/UserLogOut/UserLogOut';
 export default function NewWorkoutPage({ user, setUser }) {
 	const [menuItems, setMenuItems] = useState([]);
 	const [activeCat, setActiveCat] = useState('');
-	const [cart, setCart] = useState(null);
+	const [workout, setWorkout] = useState(null);
 	const categoriesRef = useRef([]);
 	const navigate = useNavigate();
 
@@ -28,8 +28,8 @@ export default function NewWorkoutPage({ user, setUser }) {
 		}
 		getItems();
 		async function getCart() {
-			const cart = await workoutsAPI.getCart();
-			setCart(cart);
+			const workout = await workoutsAPI.getCart();
+			setWorkout(workout);
 		}
 		getCart();
 	}, []);
@@ -40,12 +40,15 @@ export default function NewWorkoutPage({ user, setUser }) {
 	/*-- Event Handlers --*/
 	async function handleAddToWorkout(exerciseId) {
 		const updatedWorkout = await workoutsAPI.addExerciseToWorkout(exerciseId);
-		setCart(updatedWorkout);
+		setWorkout(updatedWorkout);
 	}
 
-	async function handleChangeQty(itemId, newQty) {
-		const updatedCart = await workoutsAPI.setItemQtyInCart(itemId, newQty);
-		setCart(updatedCart);
+	async function handleChangeQty(workoutItemId, newQty) {
+		const updatedWorkout = await workoutsAPI.setItemQtyInCart(
+			workoutItemId,
+			newQty
+		);
+		setWorkout(updatedWorkout);
 	}
 
 	async function handleCheckout() {
@@ -59,7 +62,7 @@ export default function NewWorkoutPage({ user, setUser }) {
 				<Logo />
 				<CategoryList
 					categories={categoriesRef.current}
-					cart={setCart}
+					cart={setWorkout}
 					setActiveCat={setActiveCat}
 				/>
 				<Link to="/workouts" className="button btn-sm">
@@ -72,7 +75,7 @@ export default function NewWorkoutPage({ user, setUser }) {
 				handleAddToWorkout={handleAddToWorkout}
 			/>
 			<WorkoutDetail
-				workout={cart}
+				workout={workout}
 				handleChangeQty={handleChangeQty}
 				handleCheckout={handleCheckout}
 			/>

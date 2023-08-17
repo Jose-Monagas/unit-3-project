@@ -33,21 +33,22 @@ async function addToWorkout(req, res) {
 // Updates an item's qty in the cart
 async function setItemQtyInCart(req, res) {
 	try {
-		const cart = await Workout.getCart(req.user._id);
-		await cart.setItemQty(req.body.itemId, req.body.newQty);
-		res.status(200).json(cart);
+		const workout = await Workout.createWorkout(req.user._id);
+		console.log(req.body);
+		await workout.setItemQty(req.body.itemId, req.body.newQty);
+		res.status(200).json(workout);
 	} catch (e) {
 		res.status(400).json({ msg: e.message });
 	}
 }
 
-// Update the cart's isPaid property to true
+// Update the cart's isFinished property to true
 async function checkout(req, res) {
 	try {
-		const cart = await Workout.getCart(req.user._id);
-		cart.isPaid = true;
-		await cart.save();
-		res.status(200).json(cart);
+		const workout = await Workout.createWorkout(req.user._id);
+		workout.isFinished = true;
+		await workout.save();
+		res.status(200).json(workout);
 	} catch (e) {
 		res.status(400).json({ msg: e.message });
 	}
@@ -57,7 +58,10 @@ async function checkout(req, res) {
 async function history(req, res) {
 	// Sort most recent workouts first
 	try {
-		const workouts = await Workout.find({ user: req.user._id, isPaid: true })
+		const workouts = await Workout.find({
+			user: req.user._id,
+			isFinished: true
+		})
 			.sort('-updatedAt')
 			.exec();
 		res.status(200).json(workouts);
