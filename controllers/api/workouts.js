@@ -4,6 +4,7 @@ module.exports = {
 	cart,
 	addToWorkout,
 	setItemQtyInCart,
+	setRepCount,
 	checkout,
 	history
 };
@@ -36,6 +37,18 @@ async function setItemQtyInCart(req, res) {
 		const workout = await Workout.createWorkout(req.user._id);
 		console.log(req.body);
 		await workout.setItemQty(req.body.itemId, req.body.newQty);
+		res.status(200).json(workout);
+	} catch (e) {
+		res.status(400).json({ msg: e.message });
+	}
+}
+
+// Updates an item's qty in the cart
+async function setRepCount(req, res) {
+	try {
+		const workout = await Workout.createWorkout(req.user._id);
+		console.log(req.body);
+		await workout.setRepCount(req.body.workoutItemId, req.body.newQty);
 		res.status(200).json(workout);
 	} catch (e) {
 		res.status(400).json({ msg: e.message });

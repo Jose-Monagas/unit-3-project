@@ -12,5 +12,7 @@ router.post('/exercises/:id', workoutCntrl.addToWorkout);
 router.post('/cart/checkout', workoutCntrl.checkout);
 // POST /api/workouts/cart/qty
 router.put('/cart/qty', workoutCntrl.setItemQtyInCart);
+// POST /api/workouts/cart/qty
+router.put('/workout-item/reps', workoutCntrl.setRepCount);
 
 module.exports = router;

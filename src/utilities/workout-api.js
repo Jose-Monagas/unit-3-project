@@ -19,6 +19,17 @@ export function setItemQtyInCart(itemId, newQty) {
 	return sendRequest(`${BASE_URL}/cart/qty`, 'PUT', { itemId, newQty });
 }
 
+// Update the item's qty in the cart
+// Will add the item to the workout if not currently in the cart
+// Sending info via the data payload instead of a long URL
+export function setRepCount(workoutItemId, newQty) {
+	console.log(workoutItemId, 'setRepCount');
+	return sendRequest(`${BASE_URL}/workout-item/reps/`, 'PUT', {
+		workoutItemId,
+		newQty
+	});
+}
+
 // Updates the workout's (cart's) isPaid property to true
 export function checkout() {
 	// Changing data on the server, so make it a POST request

@@ -1,6 +1,11 @@
 import styles from './WorkoutItem.module.scss';
 
-export default function WorkoutItem({ workoutItem, isPaid, handleChangeQty }) {
+export default function WorkoutItem({
+	workoutItem,
+	isPaid,
+	handleChangeQty,
+	handleChangeReps
+}) {
 	console.log(workoutItem);
 	return (
 		<div className={styles.WorkoutItem}>
@@ -18,7 +23,19 @@ export default function WorkoutItem({ workoutItem, isPaid, handleChangeQty }) {
 			>
 				+
 			</button>
+			<button
+				className="btn-xs"
+				onClick={() => handleChangeReps(workoutItem.id, workoutItem.reps - 1)}
+			>
+				−
+			</button>
 			<div>Reps: {workoutItem.reps}</div>
+			<button
+				className="btn-xs"
+				onClick={() => handleChangeReps(workoutItem.id, workoutItem.reps + 1)}
+			>
+				+
+			</button>
 		</div>
 	);
 }

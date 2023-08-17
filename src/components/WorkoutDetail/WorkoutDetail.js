@@ -5,6 +5,7 @@ import WorkoutItem from '../WorkoutItem/WorkoutItem';
 export default function WorkoutDetail({
 	workout,
 	handleChangeQty,
+	handleChangeReps,
 	handleCheckout
 }) {
 	if (!workout) return null;
@@ -14,6 +15,7 @@ export default function WorkoutDetail({
 			workoutItem={item}
 			isPaid={workout.isPaid}
 			handleChangeQty={handleChangeQty}
+			handleChangeReps={handleChangeReps}
 			key={item._id}
 		/>
 	));

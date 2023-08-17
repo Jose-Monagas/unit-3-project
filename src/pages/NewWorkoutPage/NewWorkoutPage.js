@@ -51,6 +51,12 @@ export default function NewWorkoutPage({ user, setUser }) {
 		setWorkout(updatedWorkout);
 	}
 
+	async function handleChangeReps(workoutItemId, newQty) {
+		console.log('here');
+		const updatedWorkout = await workoutsAPI.setRepCount(workoutItemId, newQty);
+		setWorkout(updatedWorkout);
+	}
+
 	async function handleCheckout() {
 		await workoutsAPI.checkout();
 		navigate('/workouts');
@@ -77,6 +83,7 @@ export default function NewWorkoutPage({ user, setUser }) {
 			<WorkoutDetail
 				workout={workout}
 				handleChangeQty={handleChangeQty}
+				handleChangeReps={handleChangeReps}
 				handleCheckout={handleCheckout}
 			/>
 		</main>
