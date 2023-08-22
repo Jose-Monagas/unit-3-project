@@ -12,6 +12,12 @@ export function addExerciseToWorkout(exerciseId) {
 	return sendRequest(`${BASE_URL}/exercises/${exerciseId}`, 'POST');
 }
 
+// Delete exercise from workout
+export function deleteExerciseFromWorkout(exerciseId) {
+	console.log('test');
+	return sendRequest(`${BASE_URL}/exercises/${exerciseId}`, 'DELETE');
+}
+
 // Update the item's qty in the cart
 // Will add the item to the workout if not currently in the cart
 // Sending info via the data payload instead of a long URL

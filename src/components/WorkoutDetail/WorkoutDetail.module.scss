@@ -4,7 +4,7 @@
   align-items: center;
   padding: 3vmin;
   font-size: 2vmin;
-  color: var(--text-light);
+  color: #333333;
 }
 
 .WorkoutDetail .sectionHeading {
@@ -23,9 +23,8 @@
 .WorkoutDetail .total {
   width: 100%;
   display: grid;
-  grid-template-columns: 18.35vw 5.75vw 5.25vw;
   padding: 1vmin 0;
-  color: var(--text-light);
+  color: #333333;
   border-top: .1vmin solid var(--tan-3);
 }
 
@@ -34,16 +33,23 @@
   justify-content: center;
   align-items: center;
   font-size: 1.5vw;
-  color: var(--text-dark);
+  color: #333333;
 }
 
 .WorkoutDetail .total span.right {
   display: flex;
   justify-content: flex-end;
+  flex-direction: col;
 }
 
 .WorkoutDetail .hungry {
   position: absolute;
   top: 50vh;
-  font-size: 2vmin;
+  font-size: 2vmin; 
+  color:#333333;
+}
+
+.WorkoutDetail .bttn-small {
+  position: relative;
+  color: #333333;
 }

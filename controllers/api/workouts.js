@@ -6,7 +6,8 @@ module.exports = {
 	setItemQtyInCart,
 	setRepCount,
 	checkout,
-	history
+	history,
+	deleteFromWorkout
 };
 
 // A cart is the unpaid workout for a user
@@ -24,6 +25,19 @@ async function addToWorkout(req, res) {
 	try {
 		const workout = await Workout.createWorkout(req.user._id);
 		await workout.addExerciseToWorkout(req.params.id);
+		res.status(200).json(workout);
+	} catch (e) {
+		console.log(e);
+		res.status(400).json({ msg: e.message });
+	}
+}
+
+// Delete an exercise from the workout cart
+async function deleteFromWorkout(req, res) {
+	try {
+		console.log('test2');
+		const workout = await Workout.createWorkout(req.user._id);
+		await workout.deleteExerciseFromWorkout(req.params.id);
 		res.status(200).json(workout);
 	} catch (e) {
 		console.log(e);

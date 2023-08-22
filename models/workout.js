@@ -33,15 +33,7 @@ const workoutSchema = new Schema(
 );
 
 workoutSchema.virtual('workoutTotal').get(function () {
-	// return this.workoutItems.reduce((total, item) => total + item.extPrice, 0);
-	// TODO: remove / replace
-	return 10.0;
-});
-
-workoutSchema.virtual('totalQty').get(function () {
-	// return this.workoutItems.reduce((total, item) => total + item.qty, 0);
-	// TODO: remove / replace
-	return 10.0;
+	return this.workoutItems.length;
 });
 
 workoutSchema.virtual('workoutId').get(function () {
@@ -64,6 +56,17 @@ workoutSchema.methods.addExerciseToWorkout = async function (exerciseId) {
 	const workout = this;
 	const exercise = await mongoose.model('Exercise').findById(exerciseId);
 	workout.workoutItems.push({ exercise });
+	return workout.save();
+};
+workoutSchema.methods.deleteExerciseFromWorkout = async function (
+	workoutItemId
+) {
+	console.log(`received workout item id ${workoutItemId}`);
+	const workout = this;
+	const indexToRemove = workout.workoutItems.findIndex(
+		(item) => item._id.toString() === workoutItemId
+	);
+	workout.workoutItems.splice(indexToRemove, 1);
 	return workout.save();
 };
 

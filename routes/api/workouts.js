@@ -8,6 +8,8 @@ router.get('/cart', workoutCntrl.cart);
 router.get('/history', workoutCntrl.history);
 // POST /api/workouts/exercises/:id
 router.post('/exercises/:id', workoutCntrl.addToWorkout);
+// DELETE /api/workouts/exercises/:id
+router.delete('/exercises/:id', workoutCntrl.deleteFromWorkout);
 // POST /api/workouts/cart/checkout
 router.post('/cart/checkout', workoutCntrl.checkout);
 // POST /api/workouts/cart/qty

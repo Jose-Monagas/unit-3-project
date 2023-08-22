@@ -33,9 +33,11 @@ export default function WorkoutHistoryPage({ user, setUser }) {
 	return (
 		<main className={styles.WorkoutHistoryPage}>
 			<aside className={styles.aside}>
-				<Logo />
+				<Link to="/" style={{ textDecoration: 'none' }}>
+					<Logo />
+				</Link>
 				<Link to="/workouts/new" className="button btn-sm">
-					NEW ORDER
+					NEW WORKOUT
 				</Link>
 				<UserLogOut user={user} setUser={setUser} />
 			</aside>

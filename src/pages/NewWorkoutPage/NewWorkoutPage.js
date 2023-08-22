@@ -40,6 +40,7 @@ export default function NewWorkoutPage({ user, setUser }) {
 	/*-- Event Handlers --*/
 	async function handleAddToWorkout(exerciseId) {
 		const updatedWorkout = await workoutsAPI.addExerciseToWorkout(exerciseId);
+		console.log('updated workout after adding exercise: ', updatedWorkout);
 		setWorkout(updatedWorkout);
 	}
 
@@ -65,14 +66,16 @@ export default function NewWorkoutPage({ user, setUser }) {
 	return (
 		<main className={styles.NewWorkoutPage}>
 			<aside>
-				<Logo />
+				<Link to="/" style={{ textDecoration: 'none' }}>
+					<Logo />
+				</Link>
 				<CategoryList
 					categories={categoriesRef.current}
 					cart={setWorkout}
 					setActiveCat={setActiveCat}
 				/>
 				<Link to="/workouts" className="button btn-sm">
-					PREVIOUS ORDERS
+					PREVIOUS WORKOUTS
 				</Link>
 				<UserLogOut user={user} setUser={setUser} />
 			</aside>

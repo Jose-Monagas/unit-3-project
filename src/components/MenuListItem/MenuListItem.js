@@ -6,7 +6,6 @@ export default function MenuListItem({ menuItem, handleAddToWorkout }) {
 			<img src={menuItem.url} height={'100px'} width={'100px'}></img>
 			<div className={styles.name}>{menuItem.name}</div>
 			<div className={styles.buy}>
-				<span>${menuItem.sets}</span>
 				<button
 					className="btn-sm"
 					onClick={() => handleAddToWorkout(menuItem._id)}

@@ -1,7 +1,8 @@
 import styles from './WorkoutDetail.module.scss';
 import WorkoutItem from '../WorkoutItem/WorkoutItem';
+import { useState, useEffect } from 'react';
 
-// Used to display the details of any workout, including the cart (unpaid workout)
+// Used to display the details of any workout, including the cart (unfinished workout)
 export default function WorkoutDetail({
 	workout,
 	handleChangeQty,
@@ -9,11 +10,20 @@ export default function WorkoutDetail({
 	handleCheckout
 }) {
 	if (!workout) return null;
+	console.log('workout in workoutdetail: ', workout);
+	const [workoutItems, setWorkoutItems] = useState(workout.workoutItems);
 
-	const workoutItems = workout.workoutItems.map((item) => (
+	console.log('workoutitems in workoutdetail: ', workoutItems);
+
+	useEffect(() => {
+		setWorkoutItems(workout.workoutItems);
+	}, [workout.workoutItems]);
+
+	const workoutItemList = workoutItems.map((item) => (
 		<WorkoutItem
 			workoutItem={item}
-			isPaid={workout.isPaid}
+			setWorkoutItems={setWorkoutItems}
+			isFinished={workout.isFinished}
 			handleChangeQty={handleChangeQty}
 			handleChangeReps={handleChangeReps}
 			key={item._id}
@@ -23,12 +33,12 @@ export default function WorkoutDetail({
 	return (
 		<div className={styles.WorkoutDetail}>
 			<div className={styles.sectionHeading}>
-				{workout.isPaid ? (
+				{workout.isFinished ? (
 					<span>
-						ORDER <span className="smaller">{workout.workoutId}</span>
+						WORKOUT <span className="smaller">{workout.workoutId}</span>
 					</span>
 				) : (
-					<span>Current Workout 💪</span>
+					<span style={{ fontSize: '2rem' }}>Current Workout 💪</span>
 				)}
 				<span>{new Date(workout.updatedAt).toLocaleDateString()}</span>
 			</div>
@@ -37,27 +47,24 @@ export default function WorkoutDetail({
 			>
 				{workoutItems.length ? (
 					<>
-						{workoutItems}
+						{workoutItemList}
+						<span className={styles.right}>
+							Total Exercises: {workout.workoutTotal}
+						</span>
 						<section className={styles.total}>
-							{workout.isPaid ? (
-								<span className={styles.right}>TOTAL&nbsp;&nbsp;</span>
-							) : (
+							{workout.isFinished ? null : (
 								<button
 									className="btn-sm"
 									onClick={handleCheckout}
 									disabled={!workoutItems.length}
 								>
-									CHECKOUT
+									SAVE WORKOUT
 								</button>
 							)}
-							<span>{workout.totalQty}</span>
-							<span className={styles.right}>
-								${workout.workoutTotal.toFixed(2)}
-							</span>
 						</section>
 					</>
 				) : (
-					<div className={styles.hungry}>Hungry?</div>
+					<div className={styles.hungry}>Ready to get Swole?</div>
 				)}
 			</div>
 		</div>
