@@ -1,0 +1,55 @@
+.WorkoutDetail {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3vmin;
+  font-size: 2vmin;
+  color: #333333;
+}
+
+.WorkoutDetail .sectionHeading {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.WorkoutDetail .workoutItemContainer {
+  margin-top: 3vmin;
+  justify-content: flex-start;
+  height: calc(100vh - 18vmin);
+  width: 100%;
+}
+
+.WorkoutDetail .total {
+  width: 100%;
+  display: grid;
+  padding: 1vmin 0;
+  color: #333333;
+  border-top: .1vmin solid var(--tan-3);
+}
+
+.WorkoutDetail .total span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5vw;
+  color: #333333;
+}
+
+.WorkoutDetail .total span.right {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: col;
+}
+
+.WorkoutDetail .hungry {
+  position: absolute;
+  top: 50vh;
+  font-size: 2vmin; 
+  color:#333333;
+}
+
+.WorkoutDetail .bttn-small {
+  position: relative;
+  color: #333333;
+}

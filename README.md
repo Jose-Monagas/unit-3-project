@@ -1,13 +1,17 @@
 
-# My Favorite Online Instructors
+# Workout Wise
 
-[__Colt Steele__](https://www.youtube.com/channel/UCrqAGUPPMOdo0jfQ6grikZw)
+Introducing Workout Wise: Your Personalized Fitness Companion.
 
-[__Brad Traversy__](https://www.youtube.com/channel/UC29ju8bIPH5as8OGnQzwJyA)
 
-[__Jose Santos Garcia__](https://www.youtube.com/channel/UC46wWUso9H5KPQcoL9iE3Ug)
+🏋️‍♂️ Personalized Workouts: Create workouts that are uniquely yours. Customize exercises, sets, reps, and durations to craft a routine that matches your fitness level and objectives.
 
-[__Stephen Grider__](https://www.youtube.com/channel/UCQCaS3atWyNHEy5PkDXdpNg/)
+# Create an account or log-in 
+
+![home page](https://i.postimg.cc/Y2QTtZDn/Screenshot-2023-08-22-at-2-04-48-PM.png)
+
+# Select a workout from the workout list and save it 
+![menu selection](https://i.postimg.cc/BZ57rDtR/Screenshot-2023-08-22-at-2-05-11-PM.png)
 
 ## Steps
 

@@ -1,0 +1,112 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const exerciseSchema = require('./exerciseSchema');
+
+const workoutItemSchema = new Schema(
+	// TODO: update to exerciseSchema
+	{
+		exercise: exerciseSchema,
+		reps: { type: Number, default: 1 },
+		sets: { type: Number, default: 1 }
+	},
+	{
+		timestamps: true,
+		toJSON: { virtuals: true }
+	}
+);
+
+// workoutItemSchema.virtual('extPrice').get(function () {
+// 	// 'this' is bound to the workoutItem subdoc
+// 	return this.qty * this.item.price;
+// });
+
+const workoutSchema = new Schema(
+	{
+		user: { type: Schema.Types.ObjectId, ref: 'User' },
+		workoutItems: [workoutItemSchema],
+		isFinished: { type: Boolean, default: false }
+	},
+	{
+		timestamps: true,
+		toJSON: { virtuals: true }
+	}
+);
+
+workoutSchema.virtual('workoutTotal').get(function () {
+	return this.workoutItems.length;
+});
+
+workoutSchema.virtual('workoutId').get(function () {
+	return this.id.slice(-6).toUpperCase();
+});
+
+workoutSchema.statics.createWorkout = function (userId) {
+	// 'this' is the Workout model
+	return this.findOneAndUpdate(
+		// query
+		{ user: userId, isFinished: false },
+		// update
+		{ user: userId },
+		// upsert option will create the doc if it doesn't exist
+		{ upsert: true, new: true }
+	);
+};
+
+workoutSchema.methods.addExerciseToWorkout = async function (exerciseId) {
+	const workout = this;
+	const exercise = await mongoose.model('Exercise').findById(exerciseId);
+	workout.workoutItems.push({ exercise });
+	return workout.save();
+};
+workoutSchema.methods.deleteExerciseFromWorkout = async function (
+	workoutItemId
+) {
+	console.log(`received workout item id ${workoutItemId}`);
+	const workout = this;
+	const indexToRemove = workout.workoutItems.findIndex(
+		(item) => item._id.toString() === workoutItemId
+	);
+	workout.workoutItems.splice(indexToRemove, 1);
+	return workout.save();
+};
+
+// Instance method to set an item's qty in the cart (will add item if does not exist)
+workoutSchema.methods.setItemQty = function (workoutItemId, newQty) {
+	// 'this' keyword is bound to the cart (workout doc)
+	const workout = this;
+	// Find the correct workoutItem in the workout
+	const workoutItem = workout.workoutItems.find(
+		(workoutItem) => workoutItem._id.toString() === workoutItemId
+	);
+	if (workoutItem && newQty <= 0) {
+		// Calling remove, removes itself from the workout.workoutItems array
+		workoutItem.remove();
+	} else if (workoutItem) {
+		// Set the new qty - positive value is assured thanks to prev if
+		workoutItem.sets = newQty;
+	}
+	// return the save() method's promise
+	return workout.save();
+};
+
+// Instance method to set an item's qty in the cart (will add item if does not exist)
+workoutSchema.methods.setRepCount = function (workoutItemId, newQty) {
+	console.log(workoutItemId);
+	// 'this' keyword is bound to the cart (workout doc)
+	const workout = this;
+	// Find the correct workoutItem in the workout
+	const workoutItem = workout.workoutItems.find(
+		(workoutItem) => workoutItem._id.toString() === workoutItemId
+	);
+	if (workoutItem && newQty <= 0) {
+		// Calling remove, removes itself from the workout.workoutItems array
+		workoutItem.remove();
+	} else if (workoutItem) {
+		// Set the new qty - positive value is assured thanks to prev if
+		workoutItem.reps = newQty;
+	}
+	// return the save() method's promise
+	return workout.save();
+};
+
+module.exports = mongoose.model('Workout', workoutSchema);
